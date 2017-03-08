@@ -1,0 +1,38 @@
+AssignFile(arq, 'c:\diario.txt');
+{$I-}
+Reset(arq);
+{$I+}
+if (IOResult <> 0)
+	then Rewrite(arq)
+else
+  begin
+	  CloseFile(arq);
+	  Append(arq);
+  end;
+
+
+//tratando o arquivo:
+
+var 
+linha, nome: string; 
+nreg, i: integer; 
+nota1, nota2, media: real; 
+begin Memo1.Clear; 
+Reset(arq); { abre o arquivo texto para leitura } 
+nreg := 0; 
+while (not Eof(arq)) do { enquanto não atingir a marca de final de arquivo } 
+	begin Readln(arq, linha); { lê uma linha, com os dados de um aluno, do arquivo } 
+	nreg := nreg + 1; 
+	i := pos('|', linha); 
+	nome := copy(linha, 1, i-1); { recupera o nome do aluno } 
+	delete(linha, 1, i); i := pos('|', linha); 
+	nota1 := StrToFloat(copy(linha, 1, i-1)); { recupera a 1a. nota do aluno } 
+	delete(linha, 1, i); 
+	i := pos('|', linha); 
+	nota2 := StrToFloat(copy(linha, 1, i-1)); { recupera a 2a. nota do aluno } { processando e exibindo os dados recuperados } 
+
+
+
+//ENCERRANDO O USO DO ARQUIVO E LIBERANDO MEMÓRIA.
+CloseFile(arq);
+Append(arq);

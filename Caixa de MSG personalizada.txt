@@ -1,0 +1,20 @@
+//MSG PERSONALIZADA.
+var
+  AMsgDialog: TForm;
+begin
+  AMsgDialog := CreateMessageDialog('Comando executado com sucesso', mtCustom,[mbOk]);
+
+  with AMsgDialog do
+
+    try
+      BorderSyle = bsNone
+      Caption := 'Comando executado' ;
+      Height := 140;
+      AMsgDialog.Width := 240 ;
+
+      ShowModal ;
+
+    finally
+      Free;
+    end;
+end;
